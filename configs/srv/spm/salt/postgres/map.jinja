@@ -1,0 +1,17 @@
+{% import_yaml "postgres/defaults.yaml" as defaults %}
+{% import_yaml "postgres/osmap.yaml" as osmap %}
+{% import_yaml "postgres/codenamemap.yaml" as oscodenamemap %}
+
+{% set postgres = salt['grains.filter_by'](
+    defaults,
+    merge=salt['grains.filter_by'](
+        osmap,
+        grain='os_family',
+        merge=salt['grains.filter_by'](
+            oscodenamemap,
+            grain='oscodename',
+            merge=salt['pillar.get']('postgres', {}),
+        ),
+    ),
+    base='postgres',
+) %}

@@ -1,0 +1,2 @@
+saltstack-formulas:
+  url: https://github.com/saltstack-formulas

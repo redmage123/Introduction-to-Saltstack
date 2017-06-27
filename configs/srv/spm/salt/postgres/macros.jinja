@@ -1,0 +1,29 @@
+{%- from "postgres/map.jinja" import postgres with context -%}
+
+{%- macro format_kwargs(kwarg) -%}
+
+  {%- filter indent(4) %}
+    {%- for k, v in kwarg|dictsort() %}
+- {{ k }}: {{ v }}
+    {%- endfor %}
+  {%- endfilter %}
+
+{%- endmacro %}
+
+{%- macro format_state(name, state, kwarg) %}
+
+  {%- do kwarg.update({'name': name}) %}
+  {%- if 'ensure' in kwarg %}
+    {%- set ensure = kwarg.pop('ensure') %}
+  {%- endif %}
+  {%- if 'user' not in kwarg and state != 'postgres_schema' %}
+    {%- do kwarg.update({'user': postgres.user}) %}
+  {%- endif -%}
+
+{{ state }}-{{ name }}:
+  {{ state }}.{{ ensure|default('present') }}:
+    {{- format_kwargs(kwarg) }}
+
+{%- endmacro %}
+
+# vim: ft=sls
