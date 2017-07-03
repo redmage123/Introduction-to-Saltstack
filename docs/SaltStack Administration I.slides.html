@@ -1,64 +1,8 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="chrome=1" />
-
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-<title>SaltStack Administration I slides</title>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<head><meta charset="utf-8" />
+<title>SaltStack Administration I</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-<!-- General and theme style sheets -->
-<link rel="stylesheet" href="reveal.js/css/reveal.css">
-<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
-
-<!-- If the query includes 'print-pdf', include the PDF print sheet -->
-<script>
-if( window.location.search.match( /print-pdf/gi ) ) {
-        var link = document.createElement( 'link' );
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = 'reveal.js/css/print/pdf.css';
-        document.getElementsByTagName( 'head' )[0].appendChild( link );
-}
-
-</script>
-
-<!--[if lt IE 9]>
-<script src="reveal.js/lib/js/html5shiv.js"></script>
-<![endif]-->
-
-<!-- Loading the mathjax macro -->
-<!-- Load mathjax -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-    <!-- MathJax configuration -->
-    <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-            processEscapes: true,
-            processEnvironments: true
-        },
-        // Center justify equations in code and markdown cells. Elsewhere
-        // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
-        "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
-            linebreaks: { automatic: true }
-        }
-    });
-    </script>
-    <!-- End of mathjax configuration -->
-
-<!-- Get Font-awesome from cdn -->
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css">
 
 <style type="text/css">
     /*!
@@ -11745,93 +11689,72 @@ ul.typeahead-list > li > a {
 
 <style type="text/css">
 /* Overrides of notebook CSS for static HTML export */
-.reveal {
-  font-size: 160%;
-  overflow-y: scroll;
+body {
+  overflow: visible;
+  padding: 8px;
 }
-.reveal pre {
-  width: inherit;
-  padding: 0.4em;
-  margin: 0px;
-  font-family: monospace, sans-serif;
-  font-size: 80%;
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+
+div#notebook {
+  overflow: visible;
+  border-top: none;
 }
-.reveal pre code {
-  padding: 0px;
-}
-.reveal section img {
-  border: 0px solid black;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0);
-}
-.reveal i {
-  font-style: normal;
-  font-family: FontAwesome;
-  font-size: 2em;
-}
-.reveal .slides {
-  text-align: left;
-}
-.reveal.fade {
-  opacity: 1;
-}
-.reveal .progress {
-  position: static;
-}
-div.input_area {
-  padding: 0.06em;
-}
-div.code_cell {
-  background-color: transparent;
-}
-div.prompt {
-  width: 11ex;
-  padding: 0.4em;
-  margin: 0px;
-  font-family: monospace, sans-serif;
-  font-size: 80%;
-  text-align: right;
-}
-div.output_area pre {
-  font-family: monospace, sans-serif;
-  font-size: 80%;
-}
-div.output_prompt {
-  /* 5px right shift to account for margin in parent container */
-  margin: 5px 5px 0 0;
-}
-div.text_cell.rendered .rendered_html {
-  /* The H1 height seems miscalculated, we are just hidding the scrollbar */
-  overflow-y: hidden;
-}
-a.anchor-link {
-  /* There is still an anchor, we are only hidding it */
-  display: none;
-}
-.rendered_html p {
-  text-align: inherit;
+
+@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
 }
 </style>
 
 <!-- Custom stylesheet, it must be in the same directory as the html file -->
 <link rel="stylesheet" href="custom.css">
 
-</head>
-
-
+<!-- Loading mathjax macro -->
+<!-- Load mathjax -->
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    <!-- End of mathjax configuration --></head>
 <body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
 
-
-<div class="reveal">
-<div class="slides">
-<section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><h1 style='font-family: helvetica',align = 'center'>SaltStack Administration </h1></p>
-<p><h2 style='font-family: helvetica',align='center'>Created 2017/02/01 by Braun Brelin</h2></p>
+<p>
+<h1 style='font-family: helvetica',align = 'center'>SaltStack Administration </h1>
+</p>
+<p>
+<h2 style='font-family: helvetica',align='center'>Created 2017/02/01 by Braun Brelin</h2>
+    </p>
 
 </div>
 </div>
@@ -12277,7 +12200,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src = 'graphics/RemoteMethodExecutionArchitecture.png'> </img></p>
+<p><img src = 'graphics/RemoteMethodExecutionArchitecture.png'> </img&gt;</p>
 
 </div>
 </div>
@@ -12327,6 +12250,306 @@ Access Control verification is done through the Publisher ACL (or whatever ACL s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Saltstack-basic-commands">Saltstack basic commands<a class="anchor-link" href="#Saltstack-basic-commands">&#182;</a></h3><p>The four commands used most often on the command line are:</p>
+<ol>
+<li>/usr/bin/salt</li>
+<li>/usr/bin/salt-run</li>
+<li>/usr/bin/salt-call</li>
+<li>/usr/bin/salt-key</li>
+</ol>
+<p>Of those four commands the one most often used is the salt command.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-salt-command">The salt command<a class="anchor-link" href="#The-salt-command">&#182;</a></h3><p>The /usr/bin/salt command runs on the salt master and allows salt administrators to execute jobs on salt minions.<br>
+The salt command takes as its first argument the <em>minion target.</em>  This target can be the wild card operator '*',
+a specific minion or set of minions, or other criteria, such as a regular expression.</p>
+<p>An example of the salt command is:</p>
+<p><table width=750px, align='left'></p>
+<p><tr></p>
+<p><td></p>
+<p><p style = 'font-family:courier'>
+salt '*' test.ping
+</p>
+</td>
+</tr>
+</table></p>
+<p><tr><br><br><br><br>
+The preceeding command will execute the test.ping method on all salt minions managed by this salt master. 
+test is the salt module name, and ping is the method defined inside the test module. This example shows one of the basic functions of Saltstack, remote execution.</p>
+<p>Saltstack comes with a large number of these execution modules, some of which will be explored in this course.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Salt-call.--Execution-on-the-minion.">Salt-call.  Execution on the minion.<a class="anchor-link" href="#Salt-call.--Execution-on-the-minion.">&#182;</a></h3><p>Salt-call allows us to run a specific command on a minion itself rather than on the master. Usually, this is used for debugging and testing purposes.  Note that you can use this command on the salt master itself because the salt master is running a minion as well.</p>
+<p><table width=750px, align='left'></p>
+<p><tr></p>
+<p><td></p>
+<p><p style = 'font-family:courier'>
+salt test.ping
+</p>
+</td>
+</tr>
+</table></p>
+<p><tr><br><br><br><br>
+Note that in this example, we don't need to specify a minion target as the salt-call command runs only on the localhost.</p>
+<p>Salt-call is also used in a salt topology where there is no master, only minions.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Salt-run.--Executing-directly-on-the-master.">Salt-run.  Executing directly on the master.<a class="anchor-link" href="#Salt-run.--Executing-directly-on-the-master.">&#182;</a></h3><p>Salt-run allows jobs to run directly on the salt master.  This is useful for a number of reasons</p>
+<ol>
+<li><p>Coordinating tasks across minions.  With the salt command, all minions execute the job concurrently. However, there are times when it is desirable to have the minions execute a job sequentially instead.</p>
+</li>
+<li><p>Accessing data that is only available on the master.</p>
+</li>
+</ol>
+<p><table width=750px, align='left'></p>
+<p><tr></p>
+<p><td></p>
+<p><p style = 'font-family:courier'>
+salt-run manage.up
+</p>
+</td>
+</tr>
+</table></p>
+<p><tr><br><br><br><br>
+Internally, the manage.up function calls test.ping.  It is used to determine whether the minion is up and running and managed by the salt master. As with salt-call, no minions are targeted.  This command runs only on the salt master.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Salt-key,-managing-the-Salt-PKI-infrastructure.">Salt-key, managing the Salt PKI infrastructure.<a class="anchor-link" href="#Salt-key,-managing-the-Salt-PKI-infrastructure.">&#182;</a></h3><p>Salt communicates between the master and the minions using an encrypted channel for security.  Additionally, authentication and authorization must be established between the master and the minion.</p>
+<p>The salt master keeps a record of all its minions and whether or not they are trusted.  There are three possible states.</p>
+<ol>
+<li>Accepted. The master has accepted the public key of the minion. </li>
+<li>Unaccepted.  The master has not yet accepted the public key of the minion. </li>
+<li>Rejected. The master has rejected the public key of the minion. </li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We use the salt-key command to view the public key infrastructure of Saltstack.<br>
+Simply typing in <em>salt-key</em> on the command line will print out the trust state of all the minions.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-Saltstack-PKI-file-structure">The Saltstack PKI file structure<a class="anchor-link" href="#The-Saltstack-PKI-file-structure">&#182;</a></h2><p><table align='left',width='750px'></p>
+<p><p style='font-family:courier'></p>
+<p><th>Master Files</th><th>Description</th></p>
+<p><tr></p>
+<td>
+
+<p>/etc/salt/pki/master/master.{pub.pem}
+</td></p>
+<p><td>
+The Salt Master's public and private keys
+</td>
+</tr></p>
+<p><tr></p>
+<p><td>
+/etc/salt/pk/master/minions
+</td></p>
+<p><td>
+Public keys of every accepted minion
+</td>
+</tr></p>
+<p><tr></p>
+<p><td>
+/etc/salt/pki/master/minions_pre
+</td></p>
+<p><td>
+Public key of every unaccepted minion
+</td>
+</tr></p>
+<p><tr></p>
+<p><td>
+/etc/salt/pki/master/minions_rejected
+</td></p>
+<p><td>
+Publc key of every unaccepted minion
+</td>
+</tr>
+</p>
+</table>
+<br><br><br><br><br><br></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><table width=750px, align='left'></p>
+<p><p style = 'font-family:courier'></p>
+<p><th>
+Minion files
+</th></p>
+<p><th>
+Description
+</th></p>
+<tr>
+<td>
+/etc/salt/pki/minion/minion.{pub,pem}
+</td>
+<td>
+Minion's public and private key
+</td>
+</tr>
+<tr>
+<td>
+/etc/salt/pki/minion/minion_master.pub
+</td>
+<td>
+The public key of the salt master
+</td>
+</tr><p></p>
+</table>
+<br><br><br><br><br></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-Salt-publish/subscribe-model.">The Salt publish/subscribe model.<a class="anchor-link" href="#The-Salt-publish/subscribe-model.">&#182;</a></h3><p>Saltstack works using a <em>publish/subscribe</em> model.  The saltmaster will publish events on the ZeroMQ bus that the salt minions will subscribe to.  The minions look at the target in the message to see if this message is relevant to it.</p>
+<p>The master sets up two sockets.  Port 4505 is the <em>publish_port</em>. The minions subscribe to the publish port listening for any commands that it needs to run. Anything that is returned from the execution is sent via port 4506 back to the master. Any data returned is processed by a <em>returner</em>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Accessing-Saltstack-documentation.">Accessing Saltstack documentation.<a class="anchor-link" href="#Accessing-Saltstack-documentation.">&#182;</a></h3><p>Saltstack is written in the Python programming language.  One of the features of Python is that of <em>docstrings</em>.  Docstrings are simply multiline comments that usually accompany modules, classes and functions.  Saltstack contains extensive docstrings for its codebase.   To access these docstrings, we can use the <em>sys</em> execution module.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To print out the documentation from any execution module simply use the sys.doc command.  For example:</p>
+<p><table width='750px', align='left'></p>
+<p><tr></p>
+<p><td></p>
+<p><p style='font-family:courier'>
+salt salt.master sys.doc test.ping
+</p>
+</td>
+</tr>
+</table>
+<br><br><br><br>
+This command will print out the doc string for the ping method from the test execution module.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you want to see all of the functions in a module, simply pass the module name to the sys.doc method as
+the argument.  For example:</p>
+<p><table width='750px', align='left'></p>
+<p><tr></p>
+<p><td></p>
+<p><p style='font-family:courier'>
+salt salt.master sys.doc test
+</p>
+</td>
+</tr>
+</table>
+<br><br><br><br>
+Note that if you want to see the documentation for all of the modules in the system, simply run sys.doc with no arguments.  However, be aware that it will print a very large amount of text to the screen.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The sys module has a number of other functions that can assist in understanding salt.  For example:</p>
+<p><table width='750px', align='left'></p>
+<p><tr></p>
+<p><td></p>
+<p><p style='font-family:courier'>
+salt salt.master sys.list_modules<br>
+salt salt.master sys.list_functions <module name><br>
+salt salt.master sys.argspec <function name><br>
+</p>
+</td>
+</tr>
+</table>
+<br><br><br><br><br><br>
+The first command lists all of the modules available in the current system. <br>
+The second command lists all functions within a given module. <br>
+The third command lists all of the arguments that a given function requires when called.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Salt-States">Salt States<a class="anchor-link" href="#Salt-States">&#182;</a></h2><p>The core of the Salt system is the <em>Salt state</em>.  States are kept in .sls files known as Salt State Files. Salt State files are data structures that define the desired state of any minion.  These state files are implemented in Python as Python data structures, such as lists, dictionarys, strings and so on.</p>
 
 </div>
@@ -12358,6 +12581,77 @@ Access Control verification is done through the Publisher ACL (or whatever ACL s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Salt states are stored in files with an <em>.sls</em> extension.  These files are in YAML format.  YAML is a list of key and value pairs. To look at the documentation for state functions, we can use the sys.state_doc <state module> command.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note that to run a state, we use an execution module called the <em>state</em> module.  Don't confuse the state module with the concept of a state in Saltstack. The state module is what is used by salt to actually implement the defined states that we define.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Introduction-to-YAML">Introduction to YAML<a class="anchor-link" href="#Introduction-to-YAML">&#182;</a></h2><p>YAML stands for YAML Ain't a Markup Language.  YAML is a text based format for creating structured data that is very readable and understandable.  This differs in marked contrast to other types of markup languages such as XML, which is notorious for being difficult to read and expensive to parse. <br>
+YAML consists of keys and values, For example let us consider a YAML file which describes an automibile:</p>
+<p><table align='left', width='800px'></p>
+<p><tr></p>
+<p><td></p>
+<p><p style='font-family: courier'>
+\# A YAML example <br>
+Mercedes: <br>
+&nbsp;&nbsp;Type:<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;-<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hatchback:<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fuel: "-- 'Petrol' -- 'Diesel'" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Model: A<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weight: 1400<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saloon: <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fuel: "-- 'Petrol' -- 'Diesel' -- 'Electric'"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Model: C<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weight: 2250
+</p>
+</td>
+</tr>
+</table><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+Note that we have a top level key, 'Mercedes', which maps to a complex value.  We have a list called 'Type' with two elements.  We also have an internal list 'Fuel' which is part of the value mapped to 'Type'.
+Notice that YAML uses indentation to resolve heirarchy.  'Type is part of the 'Mercedes' key because it has been indented.  If it were on the same indentation level, then it would be a completely separate key/value pair.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>YAML Best Practices</p>
+<ul>
+<li>Use UTF-8 encoding when saving files.</li>
+<li>Always use spaces for indentation, never tabs.</li>
+<li>Edit with a text editor, not a WYSIWYG editor such as Microsoft Word.</li>
+<li>Use a monowidth/monospace font such as Courier when viewing YAML files.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>You set up the state tree by defining values in the /etc/salt/master configuration file.  The <em>file_roots:</em> directive is where you would put file paths.  For example:</p>
 <p><table align='left', width='950px'></p>
 <p><tr></p>
@@ -12367,8 +12661,8 @@ file_roots:<br>
 &nbsp;&nbsp;base:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;- /srv/salt<br>
 </p>
-</td>;
-</tr>;
+</td>
+</tr>
 </table>
 <br><br><br><br><br><br>
 This sets the state tree root to /srv/salt, which is the default.  Note that if you change this value, you must restart the salt  master service in order for the change to take effect.</p>
@@ -12437,11 +12731,38 @@ Effectively what happens is that when this state is applied, Salt will install t
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's look at some more complex examples of defining minion states.  Here we have a state <em>apache</em>.  This will manage the web server on the minion.  We'd like to make sure that the apache service is starting, however, we need to specify a requirement that the service is installed before we can run it.  Additionally, we want to be able to manage the home page, <em>index.html</em>.  We will store it in our local repository</p>
-<table align='left', width='750px'>
-<tr>
-<td>
-<p style='font-family:courier'>
+<h3 id="State-ordering">State ordering<a class="anchor-link" href="#State-ordering">&#182;</a></h3><p>In a simple configuration, it may be enough that each states runs sequentially, one after another, however, most use cases require that some states run before other states due to some requirement.  This is known as <em>state order</em>.</p>
+<p>There are many salt declaration that we can use to modify our sequential state order. Here are four of them.</p>
+<ul>
+<li>require</li>
+<li>watch</li>
+<li>prereq</li>
+<li>onfail</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A require declaration in a state means that in order for that state to run, the state referenced in the requirement statement must be run first.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is an example of a non-sequential state ordering using require. Here we have a state <em>apache</em>.  This will manage the web server on the minion.  We'd like to make sure that the apache service is starting, however, we need to specify a requirement that the service is installed before we can run it.  Additionally, we want to be able to manage the home page, <em>index.html</em>.  We will store it in our local repository</p>
+<p><table align='left', width='750px'></p>
+<p><tr></p>
+<p><td></p>
+<p><p style='font-family:courier'>
 apache:<br>
 &nbsp;&nbsp;pkg.installed: []<br>
 &nbsp;&nbsp;service.running:<br>
@@ -12458,6 +12779,16 @@ apache:<br>
 </td>
 </tr>
 </table></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A watch declaration says that if a state has changed (for example a configuration file has been modified) then the state will be re-run via the state.apply method. Note that not all state modules have a watch declaration defined for it.  Check the documentation to make sure that watch is defined for that particular state.</p>
 
 </div>
 </div>
@@ -12503,7 +12834,7 @@ apache:<br>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's look at a final example of a state file.  This state file manages the <em>nginx</em> web server.</p>
+<p>Let's look at another example of a state file.  This state file manages the <em>nginx</em> web server.</p>
 
 </div>
 </div>
@@ -12523,8 +12854,8 @@ nginx:    # <--- The state identifier<br>
 &nbsp;&nbsp;service.running: # <--- This is the service.running function. It will automatically start nginx. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;- watch:       # <--- When certain files change, we want to restart the nginx server. Watch tells salt <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#      to monitor the files listed below and restart when they change. <br>
-&nbsp;&nbsp;- pkg: nginx<br>
-&nbsp;&nbsp;&nbsp;&nbsp;- file: /etc/nginx/nginx.conf    # <--- File to watch for. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- pkg: nginx<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- file: /etc/nginx/nginx.conf    # <--- File to watch for. <br>
 <br>
 # The next two sections describe how we manage the files specified on the monitor watch list.  <br>
 &nbsp;&nbsp;      /etc/nginx/nginx.conf:<br>
@@ -12554,6 +12885,88 @@ nginx:    # <--- The state identifier<br>
 </td>
 </tr>
 </table></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next we have the prereq declaration. The prereq declaration (new in the 0.16 version of Saltstack) allows us to only run a specific state if another state, which hasn't yet executed, is going to run.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For example, we can do the following:</p>
+<p><table width='750px', align='left'></p>
+<p><tr></p>
+<p><td></p>
+<p><p style='font-family:courier'>
+graceful-down:
+  cmd.run:</p>
+
+<pre><code>- name: service apache graceful
+- prereq:
+  - file: site-code
+
+</code></pre>
+<p>site-code:
+  file.recurse:</p>
+
+<pre><code>- name: /opt/site_code
+- source: salt://site/code
+</code></pre>
+<p></p>
+</td>
+</tr>
+</table>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+In this example, we will shutdown the apache server, but only if any of the code on the site has changed.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <em>onfail</em> declaration says that state A will only run if state B has failed.<br>
+For example:</p>
+<p><table width='750px', align='left'></p>
+<p><tr></p>
+<p><td></p>
+<p><p style='font-family:courier'>
+primary_mount:
+  mount.mounted:</p>
+
+<pre><code>- name: /mnt/share
+- device: 10.0.0.45:/share
+- fstype: nfs
+
+</code></pre>
+<p>backup_mount:
+  mount.mounted:</p>
+
+<pre><code>- name: /mnt/share
+- device: 192.168.40.34:/share
+- fstype: nfs
+- onfail:
+  - mount: primary_mount
+</code></pre>
+<p></p>
+</td>
+</tr>
+</table>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+Here we see an example of using the mount state module to attempt to perform a remote mount via NFS.  The backup_mount state will only run if the primary_mount state fails, in other words, if the primary NFS server is offline or, for some reason, the client minion cannot mount the file system from the primary_mount master.</p>
 
 </div>
 </div>
@@ -12901,57 +13314,6 @@ Grains suit more to define (bottom-up) environment of individual Minions as prov
 Good vs Bad</p>
 <p>Defining good as practical and bad as impractical is heavily influenced by managing system with two hands at a time (single person).</p>
 <p>In other cases, static grains may actually be very useful to let (multiple) owners of individual hodes manage preferences. This effectively makes distributed nature of static Grains match nature of responsibilities distributed among the owners. This is simply not default use case.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Introduction-to-YAML">Introduction to YAML<a class="anchor-link" href="#Introduction-to-YAML">&#182;</a></h2><p>YAML stands for YAML Ain't a Markup Language.  YAML is a text based format for creating structured data that is very readable and understandable.  This differs in marked contrast to other types of markup languages such as XML, which is notorious for being difficult to read and expensive to parse. <br>
-YAML consists of keys and values, For example let us consider a YAML file which describes an automibile:</p>
-<p><table align='left', width='800px'></p>
-<p><tr></p>
-<p><td></p>
-<p><p style='font-family: courier'>
-\# A YAML example <br>
-Mercedes: <br>
-&nbsp;&nbsp;Type:<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;-<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hatchback:<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fuel: "-- 'Petrol' -- 'Diesel'" <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Model: A<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weight: 1400<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saloon: <br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fuel: "-- 'Petrol' -- 'Diesel' -- 'Electric'"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Model: C<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weight: 2250
-</p>
-</td>
-</tr>
-</table><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-Note that we have a top level key, 'Mercedes', which maps to a complex value.  We have a list called 'Type' with two elements.  We also have an internal list 'Fuel' which is part of the value mapped to 'Type'.
-Notice that YAML uses indentation to resolve heirarchy.  'Type is part of the 'Mercedes' key because it has been indented.  If it were on the same indentation level, then it would be a completely separate key/value pair.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>YAML Best Practices</p>
-<ul>
-<li>Use UTF-8 encoding when saving files.</li>
-<li>Always use spaces for indentation, never tabs.</li>
-<li>Edit with a text editor, not a WYSIWYG editor such as Microsoft Word.</li>
-<li>Use a monowidth/monospace font such as Courier when viewing YAML files.</li>
-</ul>
 
 </div>
 </div>
@@ -13514,7 +13876,7 @@ Press [ENTER] to continue or ctrl-c to cancel adding it<br>
 </td>
 </tr>
 </table>
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><Br><br><br>
 You must press the [Enter] key, otherwise it won't add the repository</p>
 
 </div>
@@ -13535,7 +13897,7 @@ root@saltmaster:~# apt-get --yes -q update<br>
 </td>
 </tr>
 </table>
-<br><br><br><br>
+<br><br><br>
 Also, install the Python development package.</p>
 <p><table align='left', width='700px'></p>
 <p><tr></p>
@@ -13595,7 +13957,7 @@ pillar_roots:<br>
 base:<br>
 \- /salt/pillars/base <br>
 </p>
-</td></tr></table>
+</td></tr&gt;</table&gt;
 <br> <br> <br> <br> <br>
 Don't forget to create the directories specified in the salt master file!</li>
 </ol>
@@ -13625,7 +13987,7 @@ Don't forget to create the directories specified in the salt master file!</li>
 <p><p style='font-family:courier'>
 root@saltminion:~# apt-get --yes -q install python-software-properties
  </p>
- </td></tr></table>
+ </td></tr&gt;</table&gt;
  <br> <br> <br> <br> <br>
  Add the repository to apt. 
  <table align='left',width='700px'></p>
@@ -13637,8 +13999,8 @@ You are about to add the following PPA to your system:<br>
 Salt, the remote execution and configuration management tool.<br>
 More info: <a href="https://launchpad.net/~saltstack/+archive/salt">https://launchpad.net/~saltstack/+archive/salt</a><br>
 Press [ENTER] to continue or ctrl-c to cancel adding it<br>
- </td></tr></table>
- <br> <br> <br> <br><br><br><br><br>
+ </td></tr&gt;</table&gt;
+ <br> <br> <br> <br> <br><br><br><br><br>
  Update apt with apt-update
  <table align='left',width='700px'></p>
 <p><tr></p>
@@ -13646,8 +14008,8 @@ Press [ENTER] to continue or ctrl-c to cancel adding it<br>
 <p><p style='font-family:courier'>
 root@saltminion:~# apt-get --yes -q update
  </p>
- </td></tr></table>
- <br><br><br> <br> <br> <br> <br>
+ </td></tr&gt;</table&gt;
+ <br> <br> <br> <br> <br>
  Finally, install the salt-minion package
  <table align='left',width='700px'></p>
 <p><tr></p>
@@ -13655,7 +14017,7 @@ root@saltminion:~# apt-get --yes -q update
 <p><p style='font-family:courier'>
 root@saltminion:~# apt-get --yes -q install salt-minion
  </p>
- </td></tr></table>
+ </td></tr&gt;</table&gt;
  <br> <br> <br> <br> <br>
  Repeat this process for every minion you wish to configure.</p>
 
@@ -13695,7 +14057,7 @@ root@saltminion:~# apt-get --yes -q install salt-minion
 <p><p style='font-family:courier'>
 curl -o bootstrap-salt.sh -L https://bootstrap.saltstack.com
  </p>
- </td></tr></table>
+ </td></tr&gt;</table&gt;
  <br><br><br><br>
  Via Wget
  <table align='left',width='700px'></p>
@@ -13704,7 +14066,7 @@ curl -o bootstrap-salt.sh -L https://bootstrap.saltstack.com
 <p><p style='font-family:courier'>
 wget -O bootstrap-salt.sh https://bootstrap.saltstack.com
  </p>
- </td></tr></table>
+ </td></tr&gt;</table&gt;
  <br><br><br><br>
  Via Python <br>
  <table align='left',width='700px'></p>
@@ -13713,7 +14075,7 @@ wget -O bootstrap-salt.sh https://bootstrap.saltstack.com
 <p><p style='font-family:courier'>
 python -m urllib "https://bootstrap.saltstack.com" > bootstrap-salt.sh
  </p>
- </td></tr></table>
+ </td></tr&gt;</table&gt;
  <br><br><br><br>
  Once you have the script, by whichever method you choose, run it like so:
   <table align='left',width='700px'></p>
@@ -13722,7 +14084,7 @@ python -m urllib "https://bootstrap.saltstack.com" > bootstrap-salt.sh
 <p><p style='font-family:courier'>
 sudo sh bootstrap-salt.sh
  </p>
- </td></tr></table>
+ </td></tr&gt;</table&gt;
  <br><br><br><br>
  This will download and install the latest stable version of SaltStack. Once done, we can now configure the master and create minions as we see fit.</p>
 
@@ -13768,25 +14130,6 @@ salt '\*' chocolately.install <some package here>
 </tr>
 </table>
 <br><br><br><br></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Installing-Salt-to-Amazon-AWS">Installing Salt to Amazon AWS<a class="anchor-link" href="#Installing-Salt-to-Amazon-AWS">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's now do an example of implementing a package with Salt.  We'll install a webserver called <em>nginx</em> though salt.</p>
 
 </div>
 </div>
@@ -14599,63 +14942,12 @@ salt '*' --out=json --static nagios.run '/usr/lib/nagios/plugins/check_procs -w 
 
 </div>
 </div>
-</div></section></section>
 </div>
-</div>
-
-<script>
-
-require(
-    {
-      // it makes sense to wait a little bit when you are loading
-      // reveal from a cdn in a slow connection environment
-      waitSeconds: 15
-    },
-    [
-      "reveal.js/lib/js/head.min.js",
-      "reveal.js/js/reveal.js"
-    ],
-
-    function(head, Reveal){
-
-        // Full list of configuration options available here: https://github.com/hakimel/reveal.js#configuration
-        Reveal.initialize({
-            controls: true,
-            progress: true,
-            history: true,
-
-            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-            transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/none
-
-            // Optional libraries used to extend on reveal.js
-            dependencies: [
-                { src: "reveal.js/lib/js/classList.js",
-                  condition: function() { return !document.body.classList; } },
-                { src: "reveal.js/plugin/notes/notes.js",
-                  async: true,
-                  condition: function() { return !!document.body.classList; } }
-            ]
-        });
-
-        var update = function(event){
-          if(MathJax.Hub.getAllJax(Reveal.getCurrentSlide())){
-            MathJax.Hub.Rerender(Reveal.getCurrentSlide());
-          }
-        };
-
-        Reveal.addEventListener('slidechanged', update);
-
-        var update_scroll = function(event){
-          $(".reveal").scrollTop(0);
-        };
-
-        Reveal.addEventListener('slidechanged', update_scroll);
-
-    }
-);
-</script>
-
+    </div>
+  </div>
 </body>
+
+ 
 
 
 </html>
