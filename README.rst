@@ -39,7 +39,7 @@ Outline
 
 Licensing
 ----------------------------------
-<img src='graphics/CC-BY-SA_icon.svg.png'> </img>
+image:: graphics/CC-BY-SA_icon.svg.png
 All documentation and code examples are licensed by Braun Brelin Copyright 2017
 Under the Creative Commons Attribution + ShareAlike BY-SA License.
 
